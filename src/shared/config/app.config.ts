@@ -32,6 +32,9 @@ const appConfigurationsSchema = z.object({
   CRYPTO_IV: z.string().min(1),
 
   APP_SECRET: z.string().min(1),
+
+  REDIS_HOST: z.string().min(1),
+  REDIS_PORT: z.number(),
 });
 
 let appConfigurations: z.infer<typeof appConfigurationsSchema> = {};
@@ -68,7 +71,10 @@ try {
 
     CRYPTO_IV: process.env.CRYPTO_IV,
 
-    APP_SECRET: process.env.APP_SECRET,
+    APP_SECRET: process.env.APP_SECRET,    
+    
+    REDIS_HOST: process.env.REDIS_HOST,
+    REDIS_PORT: parseInt(process.env.REDIS_PORT),
   });
 } catch (error) {
   if (error instanceof ZodError) {

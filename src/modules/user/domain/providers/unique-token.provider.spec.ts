@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UniqueTokenProviderInterface } from './UniqueToken.provider';
+import { UniqueTokenProviderInterface } from './unique-token.provider';
 
 describe('Unique Token Provider Interface Test Suites', () => {
   const mockUniqueTokenProviderInterface: UniqueTokenProviderInterface = {
