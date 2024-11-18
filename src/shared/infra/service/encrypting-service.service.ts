@@ -5,12 +5,17 @@ import { UnprocessableDataException } from '../../domain/errors/UnprocessableDat
 import { EncryptMatrixParamsDTO, EncryptMatrixReturnDTO } from '../../domain/dtos/request/EncryptMatrix.request.dto';
 import { DecryptMatrixParamsDTO, DecryptMatrixReturnDTO } from '../../domain/dtos/request/DecryptMatrix.request.dto';
 import { InvalidKeysException } from '../../domain/errors/InvalidKeys.exception';
+import { validateKey } from '../../utils/KeyLength.validate';
 
 @Injectable()
 export class EncryptingService {
     constructor() {}
 
     async encryptMatrix(data: EncryptMatrixParamsDTO): Promise<EncryptMatrixReturnDTO> {
+        if (!validateKey(data.iv) || !validateKey(data.secret)) {
+            throw new InvalidKeysException();
+        }
+
         if (!matrixValidate(data.matrix)) {
             throw new UnprocessableDataException("Matriz inválida. Insira uma válida.")
         }
@@ -23,6 +28,10 @@ export class EncryptingService {
     }
 
     async decryptMatrix(data: DecryptMatrixParamsDTO): Promise<DecryptMatrixReturnDTO> {
+        if (!validateKey(data.iv) || !validateKey(data.secret)) {
+            throw new InvalidKeysException();
+        }
+        
         const encrypterProvider = new EncrypterProvider(data.iv, data.secret);
 
         try {
