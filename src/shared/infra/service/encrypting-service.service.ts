@@ -12,7 +12,7 @@ export class EncryptingService {
     constructor() {}
 
     async encryptMatrix(data: EncryptMatrixParamsDTO): Promise<EncryptMatrixReturnDTO> {
-        if (!validateKey(data.iv) || !validateKey(data.secret)) {
+        if (data.iv.length !== 16 || data.secret.length !== 32) {
             throw new InvalidKeysException();
         }
 
@@ -28,10 +28,10 @@ export class EncryptingService {
     }
 
     async decryptMatrix(data: DecryptMatrixParamsDTO): Promise<DecryptMatrixReturnDTO> {
-        if (!validateKey(data.iv) || !validateKey(data.secret)) {
+        if (data.iv.length !== 16 || data.secret.length !== 32) {
             throw new InvalidKeysException();
         }
-        
+
         const encrypterProvider = new EncrypterProvider(data.iv, data.secret);
 
         try {

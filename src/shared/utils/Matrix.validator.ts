@@ -3,7 +3,5 @@ export const matrixValidate = (matrix: string): boolean =>  {
         return false;
     }
 
-    if (/[a-zA-Z]/.test(matrix)) {
-        return false;
-    }
+    return true
 }

@@ -5,13 +5,13 @@ export class KeyProvider implements KeyProviderInterface {
     constructor() {}
     
     public generateIV(): string {
-        let iv = randomBytes(16);
+        let iv = randomBytes(8);
 
         return iv.toString('hex');
     }
 
     public generateSecret(): string {
-        let secret = randomBytes(32);
+        let secret = randomBytes(16);
 
         return secret.toString('hex');
     }
