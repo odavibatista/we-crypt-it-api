@@ -1,9 +1,9 @@
 import { DocumentBuilder } from '@nestjs/swagger';
 
 export const sharedSwaggerConfig = new DocumentBuilder()
-  .setTitle('Insira o nome do projeto aqui')
+  .setTitle('WeCryptIt API')
   .setDescription(
-    'Insira a Descrição Aqui.',
+    'API montada para o projeto WeCryptIt.',
   )
   .setVersion('1.0.0')
   .addBearerAuth(
