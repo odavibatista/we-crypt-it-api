@@ -13,12 +13,6 @@ const appConfigurationsSchema = z.object({
     .enum(['development', 'production', 'test', 'local'])
     .default('development'),
 
-  CRYPTO_SECRET: z.string().min(1),
-
-  CRYPTO_IV: z.string().min(1),
-
-  APP_SECRET: z.string().min(1),
-
 });
 
 let appConfigurations: z.infer<typeof appConfigurationsSchema> = {};
@@ -29,13 +23,7 @@ try {
     NODE_ENV: process.env.NODE_ENV,
 
     API_URL: process.env.API_URL,
-    API_PORT: parseInt(process.env.API_PORT),
-
-    CRYPTO_SECRET: process.env.CRYPTO_SECRET,
-
-    CRYPTO_IV: process.env.CRYPTO_IV,
-
-    APP_SECRET: process.env.APP_SECRET,    
+    API_PORT: parseInt(process.env.API_PORT), 
     
   });
 } catch (error) {
